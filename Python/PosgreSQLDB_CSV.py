@@ -8,8 +8,8 @@ import ConfigParser
 
 
 date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-
-Run_Info = {'run_name': 'Denali_run5', 'product_name': 'Denali', 'os': 'Linux', 'test_type': 0, 'build_info': 'NA',
+cwd = os.getcwd()
+Run_Info = {'run_name': 'Product_A_run1', 'product_name': 'Product_A', 'os': 'Linux', 'test_type': 0, 'build_info': 'NA',
         'start_time': date, 'end_time': date, 'total': 16, 'status': 0, 'log_file': 'http://www.google.com', 'test_comment': 'NA', 'area': 'Area1'}
 
 
@@ -99,7 +99,7 @@ class resultsUpload:
         conn.close()
 
 if __name__ == '__main__':
-    resultsUpload('/home/systemqa/samuel/QA-Web/Python/db_config.ini').upload(Run_Info, '/home/systemqa/samuel/QA-Web/Python')
+    resultsUpload(cwd + '/db_config.ini').upload(Run_Info, cwd)
 
 
 

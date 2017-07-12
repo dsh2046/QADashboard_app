@@ -99,8 +99,8 @@ class resultsUpload:
         conn.close()
 
 if __name__ == '__main__':
-    # resultsUpload(cwd + '/db_config.ini').upload(Run_Info, cwd)
-    print('123')
+    resultsUpload(cwd + '/db_config.ini').upload(Run_Info, cwd)
+
 
 
 

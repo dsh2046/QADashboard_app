@@ -1,0 +1,91 @@
+{% extends 'home/pages/tables.html' %}
+{% load staticfiles %}
+{%block title%}<title>Login</title>{% endblock %}
+{% block body %}
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="POST" id="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input id="username" class="form-control" placeholder="Username" name="email" type="email" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me" id="box">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <a href="#" class="btn btn-lg btn-success btn-block">Login</a>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static '/vendor/jquery/jquery.min.js'%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static '/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static '/vendor/metisMenu/metisMenu.min.js'%}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static '/dist/js/sb-admin-2.js'%}"></script>
+
+    <script src="{% static '/vendor/sweetalert2/sweetalert2.min.js'%}"></script>
+
+
+    <script>
+
+
+
+        $(function(){
+
+            $('.btn').click(function(){
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'login_validate' %}",
+                    data: {username: username, password: password},
+                    success: function(data){
+                        if(data=='1')
+                        {
+                            if($('#box').is(':checked'))
+                                $.ajax({
+                                    type: "GET",
+                                    url: "{% url 'index' %}",
+                                    data: {remember: 1},
+                                    success: function(){location.href="{% url 'index' %}";}
+                                })
+                            else
+                                location.href="{% url 'index' %}";
+                        }
+                        else
+                        {
+                            swal('Oops..', 'Please check your username or password', 'error')
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
+</body>
+{% endblock %}
+</html>

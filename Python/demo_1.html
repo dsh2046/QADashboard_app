@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title>My wonderful PyH page</title>
+</head>
+<body><h4>Hi All:</h4>
+<i><span><h1 style="display:inline-block">BlueIceAutomationSuite</h1>
+<h2 style="color:red;display:inline-block">(BUILD FAILED)</h2>
+</span>
+</i>
+<div><span id="total">Total:  28</span>
+<span style="color:green;margin-left:20px" id="pass">Pass:  17</span>
+<span style="color:red;margin-left:20px" id="fail">Fail:  11</span>
+</div>
+<div style="margin-top: 20px" id="dataList" class="col-lg-6"><table style="margin-bottom:20px" border="1" id="apifail"><tr style="text-align:center;font-weight:600"><td colspan="3">api</td>
+<span style="color:green">  (Pass:9</span>
+<span style="color:red">   Fail:0)</span>
+</tr>
+<tr></tr>
+<tr><tr><td style="padding:5px">VerifyLogin</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifySensorTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyMappingTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyOPerationTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyRawDatasetTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyCombinedDatasetTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyUsersTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyRolesTab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyAITab</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+</tr>
+</table>
+<table style="margin-bottom:20px" border="1" id="Datacenterfail"><tr style="text-align:center;font-weight:600"><td colspan="3">Datacenter</td>
+<span style="color:green">  (Pass:0</span>
+<span style="color:red">   Fail:7)</span>
+</tr>
+<tr><tr><td style="padding:5px">CreateNewTenantonCenterAsAdmin</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Element locator '//swui-datatable/div/datatable-footer/div/div' did not match any elements after 5 seconds</td>
+
+</tr>
+<tr><td style="padding:5px">LoginasNewTenantandEditNameCode</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Not able to login into DataCenter, please check that server is up and running</td>
+
+</tr>
+<tr><td style="padding:5px">CreateNewRoleinTenant</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Not able to login into DataCenter, please check that server is up and running</td>
+
+</tr>
+<tr><td style="padding:5px">CreateNewUserInTenant</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Not able to login into DataCenter, please check that server is up and running</td>
+
+</tr>
+<tr><td style="padding:5px">ActivateNonExistingTerminal</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Keyword 'Wait Until Element Is Visible' failed after retrying for 30 seconds. The last error was: Element locator '//app-terminals/div[2]/div[1]/div[2]/button' did not match any elements after 5 seconds</td>
+
+</tr>
+<tr><td style="padding:5px">CreateTerminalAndActivateonCenter</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Not able to login into DataCenter, please check that server is up and running</td>
+
+</tr>
+<tr><td style="padding:5px">CreateDashboard</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">Keyword 'Wait Until Element Is Visible' failed after retrying for 30 seconds. The last error was: Element locator '//span[contains(text(),'New')]' did not match any elements after 5 seconds</td>
+
+</tr>
+</tr>
+<tr></tr>
+</table>
+<table style="margin-bottom:20px" border="1" id="Terminalfail"><tr style="text-align:center;font-weight:600"><td colspan="3">Terminal</td>
+<span style="color:green">  (Pass:8</span>
+<span style="color:red">   Fail:4)</span>
+</tr>
+<tr><tr><td style="padding:5px">ActivateSensor</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">ValueError: Element locator '//app-sensors/div[2]/div[3]/swui-datatable/div/datatable-footer/div/div' did not match any elements.</td>
+
+</tr>
+<tr><td style="padding:5px">LinkingSensorMapping</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">ValueError: Element locator '//app-sensors/div[2]/div[3]/swui-datatable/div/datatable-footer/div/div' did not match any elements.</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyRawDataSet</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">No Raw Dataset found in filtering in data tab of terminal</td>
+
+</tr>
+<tr><td style="padding:5px">PushDataFromSensor</td>
+<td style="color:red;padding:5px">FAIL</td>
+<td style="color:red;padding:5px">No Raw Dataset found in filtering in data tab of terminal</td>
+
+</tr>
+</tr>
+<tr><tr><td style="padding:5px">CreateSensor</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">CreateMapping</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyOperationLogs</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">VerifyInfoTabValues</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">CreateNewRoleTerminal</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">CreateNewUserTerminal</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">LoginAsNewUser</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+<tr><td style="padding:5px">EditUserProfile</td>
+<td style="color:green;padding:5px">PASS</td>
+<td style="color:green;padding:5px">N/A</td>
+
+</tr>
+</tr>
+</table>
+</div>
+<h4>Thanks~</h4>
+<h4>Regards</h4>
+</body>
+</html>

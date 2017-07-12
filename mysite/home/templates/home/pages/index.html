@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load divide %}
+{% load ifallpass %}
+{% load staticfiles %}
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'dist/css/sb-admin-2.css' %}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{% static 'vendor/morrisjs/morris.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+        <!-- DataTables CSS -->
+    <link href="{% static '/vendor/datatables-plugins/dataTables.bootstrap.css'%}" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="{% static '/vendor/datatables-responsive/dataTables.responsive.css'%}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{% static 'vendor/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'vendor/morrisjs/morris.min.js' %}"></script>
+    <script src="{% static 'data/morris-data.js' %}"></script>
+    <script src="{% static '/vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static '/vendor/datatables-plugins/dataTables.bootstrap.min.js'%}"></script>
+    <script src="{% static '/vendor/datatables-responsive/dataTables.responsive.js'%}"></script>
+    <script src="{% static '/js/echarts.js'%}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
+
+</head>
+        <style>
+            h2 {color:darkblue;text-align: center;}
+            .page-header{margin-top: 1%;}
+            .tooltip2 {
+                position: relative;
+            }
+            .tooltiptext2 {
+                visibility: hidden;
+                width: 250px;
+                background-color: black;
+                opacity:0.8;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 999;
+                bottom: 200%;
+                left: 0%;
+                margin-left: -320px;
+            }
+
+            .tooltiptext2::after {
+                content: " ";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: black transparent transparent transparent;
+            }
+            .tooltip2:hover .tooltiptext2 {
+                visibility: visible;
+            }
+
+
+            td.details-control {
+                background: url("{% static 'details_open.png' %}") no-repeat center center;
+                cursor: pointer;
+            }
+            tr.shown td.details-control {
+                background: url("{% static 'details_close.png' %}") no-repeat center center;
+        }
+        </style>
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <a class="navbar-brand" href="/"><img src="{% static 'download.png' %}" width="32%"/></a>
+
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+{#                <a class="navbar-brand" href="/index/" >{{ username }}</a>#}
+{#                <li class="dropdown">#}
+{#                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">#}
+{#                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu dropdown-user">#}
+{#                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>#}
+{#                        </li>#}
+{#                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>#}
+{#                        </li>#}
+{#                        <li class="divider"></li>#}
+{#                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                    <!-- /.dropdown-user -->#}
+{#                </li>#}
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li >
+                            {% for product in side %}
+                                {% if forloop.first %}
+                                    <a href="?ttn=Functional&pn={{ product.name }}"><i class="fa fa-home fa-fw"></i> Home</a>
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i>  Products<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                {% for product in side %}
+                                <li>
+                                    <a href="?pn={{ product.name }}" ><i class="fa fa-database fa-fw"></i><b>{{ product.name }}</b><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+
+                                        <li><a href="?ttn=Functional&pn={{ product.name }}">Functional</a></li>
+                                        <li><a href="?ttn=Performance&pn={{ product.name }}">Performance</a></li>
+                                    </ul>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+{#                        <li>#}
+{#                            <a id="a_histogram" ><i class="fa fa-bar-chart-o fa-fw"></i><span style="margin-left:5px">Histogram</span></a>#}
+{#                        </li>#}
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+
+
+        <div id="page-wrapper" >
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header" style="margin-bottom: 10px">QA Dashboard</br><span style="font-size: 17px">Toronto</span></h2>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                {% for product in result %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-database fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ product.name }}</div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a href="?ttn=Functional&pn={{ product.name }}" id="detail">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- /.row -->
+
+            <div>
+                {% if choose_type %}
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Functional</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="?ttn=Functional&pn={{ product_name }}" id="detail">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Performance</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="?ttn=Performance&pn={{ product_name }}" id="detail">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+
+            {% if detail %}
+
+                <div class="row mainTB" style="margin-top:0">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 style="text-align: center">
+                                <a href="#" style="float:left;display:none" id="table"><i class="fa fa-table"></i></a>
+                                <b>{{ product_name }}</b>
+                                <a href="#" style="float:left" id="line-chart"><i class="fa fa-bar-chart-o "></i></a>
+
+                            </h4>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none">ID</th>
+                                        <th></th>
+                                        <th>Job Name</th>
+                                        <th>Type</th>
+                                        <th>Date/Time</th>
+                                        <th>Total</th>
+                                        <th>Pass</th>
+                                        <th>Fail</th>
+                                        <th>Pass %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in detail %}
+                                        <tr>
+                                            <td style="display:none">{{ data.id }}</td>
+                                            <td class="details-control"></td>
+                                            <td  class="datalist"><a href="#"><b><i>{{ data.name }}</i></b></a></td>
+                                            <td>{{ data.test_type }}</td>
+                                            <td>{{ data.start_time|date:"Y-m-d H:i:s" }}</td>
+                                            <td>{{ data.total_ran }}</td>
+                                            <td>{{ data.total_passed }}</td>
+                                            <td>{{ data.total_failed }}</td>
+                                            {% if data.total_passed|ifallpass:data.total_ran %}
+                                            <td style="background-color:#ffcccc">{{ data.total_passed|divide:data.total_ran }}</td>
+                                            {% else %}
+                                            <td>{{ data.total_passed|divide:data.total_ran }}</td>
+                                            {% endif %}
+                                        </tr>
+
+
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <div id="wrapper-his" class="row hisTB" style="display:none">
+                 <div class="col-lg-12 col-sm-12" id="container2" style="width:95%;height:500px;margin-top:0;">
+                    <div id="histogram"></div>
+                 </div>
+                 <div></div>
+             </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+                <div class="row subTB" style="display:none;margin-top:0">
+                <div class="col-lg-8 col-sm-6" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading sub_panel_heading">
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped  table-hover" id="subTab">
+                                    <thead>
+                                        <tr>
+
+                                            <th>  Name  </th>
+                                            <th>  Component  </th>
+                                            <th>  Status</th>
+                                            <th>  Link  </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="detail">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <div class="col-lg-4 col-sm-6" id="container">
+                    <h4 style="display:inline-block"><span id="pass" class="label label-success"><b>Pass:</b><b id="pass_num"></b></span></h4>
+                    <h4 style="display:inline-block"><span id="fail"  class="label label-danger"><b>Fail:</b><b id="fail_num"></b></span></h4>
+                    <h4 style="display:inline-block"><span id="others"  class="label label-warning"><b>Others:</b><b id="other_num"></b></span></h4>
+                    <h4 style="display:inline-block"><span id="total" style="margin-left:50%" class="label label-default"><b>Total:</b><b id="total_num"></b></span></h4>
+        <div id="chart"></div>
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+
+
+
+<script>
+$(document).ready(function() {
+
+var table = $('#dataTables-example').DataTable({
+                "order": [[4, 'desc']],
+                "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 1 ] }]
+            });
+
+
+    $(".details-control").click(function(){
+
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        var data_id = $(this).prev().html()
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: "{% url 'compare'%}",
+                data: {id: data_id, test_type:'{{ test_type }}' },
+                success:function(data){
+                    if(data!='error') {
+                        data = eval('(' + data + ')')
+                        function format () {
+                            // `d` is the original data object for the row
+                            return'<div class="col-lg-4">' +
+                            '<table class="table table-hover" id="regress'+data_id+'">' +
+                                '<th style="color:red">Regression</th>' +
+                                '</table>' +
+                            '</div>' +
+
+                            '<div class="col-lg-4">' +
+                                '<table class="table table-hover" id="progress'+data_id+'">' +
+                                    '<th style="color:green">Progression</th>' +
+                                    '<tr></tr>' +
+                                    '</table>' +
+                            '</div>' +
+
+                            '<div class="col-lg-4">' +
+                                '<table class="table table-hover" id="new'+data_id+'">' +
+                                    '<th style="color:blue">New Testcase</th>' +
+                                    '<tr></tr>' +
+                                '</table>' +
+                            '</div>';
+                        }
+                        // Open this row
+                        row.child(format()).show();
+                        tr.addClass('shown');
+                         $.each(data.regress, function(k, v){
+                                    $('#regress'+data_id).append("<tr style='background-color:#ffcccc'><td>"+v+"</td></tr>")
+                                })
+                        $.each(data.progress, function(k, v){
+                                    $('#progress'+data_id).append("<tr style='background-color:#e6ffee'><td>"+v+"</td></tr>")
+                                })
+                        $.each(data.new, function(k, v){
+                                    $('#new'+data_id).append("<tr><td>"+v+"</td></tr>")
+                                })
+                    }
+                    else{
+                        row.child('Last record!').show();
+                        tr.addClass('shown');
+                    }
+                }
+            })
+
+        }
+
+    })
+
+
+    $(".datalist").click(function(){
+        function isContains(str, substr) {
+            return str.indexOf(substr) >= 0;
+        }
+        var pass = 0;
+        var fail = 0;
+        var other = 0;
+        var total = 0;
+        var username = '{{username}}';
+        id = $(this).parent().children("td:first-child").text();
+        panel_name = $(this).children("td:nth-child(2)").text();
+        $('.sub_panel_heading').html('');
+        $('.sub_panel_heading').append('<h4><a href="#" class="back"><i class="fa fa-table"></i></a>'+'<span style="margin-left:36%;" class="test panel_name">'+panel_name+'</span><b>{{ product_name }}</b>  {{ test_type }} TestCase</h4>');
+        $.ajax({
+                type: "GET",
+                url: "{% url 'detail'%}",
+                data: {id: id, username: username, test_type:'{{ test_type }}' },
+                success:function(data){
+                    data = eval('('+data+')');
+                    $('.detail').html('');
+                    $.each(data, function(k,v){
+                        total = data[0][6]
+                        if(isContains(v[4],"Pass")){
+                            pass+=1;
+                            $('.detail').append('<tr class="success"><td><b><i>'+v[0]+'</i></b></td><td><div style="width:120px;text-align:center">'+v[7]+'</div></td><td><div style="width:100px;text-align:center">'+v[4]+'</div></td><td><a href='+v[5]+'>'+v[5]+'</a></td></tr>');
+                        }
+                        else{
+                            fail+=1;
+                            //$('.detail').append('<tr class="danger tooltip2"><td><b><i>'+v[0]+'</i></b></td><td>'+v[1]+'</td><td>'+v[4]+'</td><td><span class="tooltip2">'+v[5]+'<span class="tooltiptext2">'+v[5]+'</span></span></td></tr>');
+                              $('.detail').append('<tr class="danger tooltip2"><td><div style="width:100px"><b><i>'+v[0]+'</i></b></div></td><td><div style="width:120px;text-align:center">'+v[7]+'</div></td><td><div style="width:100px;text-align:center">'+v[4]+'</div></td><td><a href='+v[5]+'>'+v[5]+'</a></td></tr>');
+                        }
+                    })
+                    other = total - (pass+fail)
+                    $('#subTab').DataTable();
+                    $('#pass_num').html('');
+                    $('#pass_num').append(pass);
+                    $('#fail_num').html('');
+                    $('#fail_num').append(fail);
+                    $('#other_num').html('');
+                    $('#other_num').append(other);
+                    $('#total_num').html('');
+                    $('#total_num').append(Number(pass)+Number(fail)+Number(other));
+
+                    $('.subTB').css('display','');
+                    $('.mainTB').css('display','none')
+
+                    $('.back').click(function(){
+                        $('.subTB').css('display','none')
+                        $('.mainTB').css('display','')
+
+                    })
+
+                    var container = document.getElementById('container');
+                    var chart = document.getElementById('chart')
+                    var resizecon = function(){
+                        chart.style.width = container.clientWidth+"px";
+                        chart.style.height = container.clientWidth+"px";
+                    }
+                    resizecon();
+                    var myChart = echarts.init(chart);
+                    var giftImageUrl = "https://d1qb2nb5cznatu.cloudfront.net/startups/i/602112-c37af9df4111c6ffd5845a986ca3d477-medium_jpg.jpg?buster=1423269026"
+                    var option = {
+                         graphic: {
+                             elements: [{
+                                 type: 'image',
+                                 style: {
+                                     image: giftImageUrl,
+                                     width: container.clientWidth/9,
+                                     height: container.clientWidth/9
+                                 },
+                                 left: '44%',
+                                 top: '34%'
+                             }]
+                         },
+                         series: [{
+                             type: 'pie',
+                             radius: [30, '55%'],
+                             center: ['50%', '40%'],
+                             roseType: 'radius',
+                             color: ['#46d185', '#ec5845', '#ffcc00'],
+                             data: [{
+
+                                 value: pass,
+                                 name: 'PASS'
+                             }, {
+                                 value: fail,
+                                 name: 'FAIL'
+                             }, {
+                                 value: other,
+                                 name: 'OTHER'
+                             }],
+
+                             label: {
+                                 normal: {
+                                     textStyle: {
+                                         fontSize: 14
+                                     },
+                                     formatter: function(param) {
+                                         return param.name + ':\n' + Math.round(param.percent) + '%';
+                                     }
+                                 }
+                             },
+                             labelLine: {
+                                 normal: {
+                                     smooth: true,
+                                     lineStyle: {
+                                         width: 2
+                                     }
+                                 }
+                             },
+                             itemStyle: {
+                                 normal: {
+                                     shadowBlur: 30,
+                                     shadowColor: 'rgba(0, 0, 0, 0.4)'
+                                 }
+                             },
+
+                             animationType: 'scale',
+                             animationEasing: 'elasticOut',
+                             animationDelay: function(idx) {
+                                 return Math.random() * 200;
+                             }
+                         }]
+                     };
+                    myChart.setOption(option);
+                    window.onresize = function () {
+                            resizecon();
+                            myChart.resize();
+                        };
+
+                },
+
+        })
+    })
+
+    $('#table').click(function(){
+        $('#table').css('display','none');
+        $('#wrapper-his').css('display','none');
+        $('table').css('display','');
+        $('#line-chart').css('display','');
+    })
+
+    $('#line-chart').click(function(){
+        $('table').css('display','none');
+        $('#table').css('display','');
+        $('#line-chart').css('display','none');
+        $('#wrapper-his').css('display','');
+        var container = document.getElementById('container2');
+        var chart = document.getElementById('histogram')
+        var resizecon = function(){
+        chart.style.width = container.clientWidth+"px";
+        chart.style.height = container.clientHeight+"px";
+        }
+        resizecon();
+        var myChart = echarts.init(chart);
+
+        var xData = function(){
+            var data = [];
+            {% for i in detail %}
+                var date = '{{ i.name }}\n{{i.start_time}}';
+                var date_filter = '';
+                date_str = date.split(",");
+                $.each(date_str, function(i,n){
+                    date_filter += n+'\n';
+                })
+                data.push(date_filter);
+            {% endfor %}
+            return data;
+        }();
+
+        var pass_data = [];
+        var fail_data = [];
+        var total_data = [];
+        {% for i in detail %}
+        pass_data.push('{{i.total_passed}}');
+        fail_data.push('{{i.total_failed}}');
+        total_data.push('{{i.total_ran}}');
+        {% endfor %}
+
+        option2 = {
+        backgroundColor: "#344b58",
+        "title": {
+        "text": "",
+        "subtext": "",
+        x: "4%",
+
+        textStyle: {
+        color: '#fff',
+        fontSize: '22'
+        },
+        subtextStyle: {
+        color: '#90979c',
+        fontSize: '16',
+
+        },
+        },
+        "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+        "type": "shadow",
+        textStyle: {
+            color: "#fff"
+        }
+
+        },
+        },
+        "grid": {
+        "borderWidth": 0,
+        "top": 110,
+        "bottom": 95,
+        textStyle: {
+        color: "#fff"
+        }
+        },
+        "legend": {
+        x: '4%',
+        top: '11%',
+        textStyle: {
+        color: '#90979c',
+        },
+        "data": ['FAIL', 'PASS']
+        },
+
+
+        "calculable": true,
+        "xAxis": [{
+        "type": "category",
+        "axisLine": {
+        lineStyle: {
+            color: 'white'
+        }
+        },
+        "splitLine": {
+        "show": false
+        },
+        "axisTick": {
+        "show": false
+        },
+        "splitArea": {
+        "show": false
+        },
+        "axisLabel": {
+        "interval": 0,
+
+        },
+        "data": xData,
+        }],
+        "yAxis": [{
+        "type": "value",
+        "splitLine": {
+        "show": false
+        },
+        "axisLine": {
+        lineStyle: {
+            color: 'white'
+        }
+        },
+        "axisTick": {
+        "show": false
+        },
+        "axisLabel": {
+        "interval": 0,
+
+        },
+        "splitArea": {
+        "show": false
+        },
+
+        }],
+        "dataZoom": [{
+        "show": true,
+        "height": 30,
+        "xAxisIndex": [
+        0
+        ],
+        bottom: 10,
+        "start": 0,
+        "end": 100,
+        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+        handleSize: '110%',
+        handleStyle:{
+        color:"#d3dee5",
+
+        },
+        textStyle:{
+        color:"#fff"},
+        borderColor:"#90979c"
+
+
+        }, {
+        "type": "inside",
+        "show": true,
+        "height": 15,
+        "start": 1,
+        "end": 35
+        }],
+        "series": [{
+        "name": "FAIL",
+        "type": "bar",
+        "stack": "总量",
+        "barMaxWidth": 35,
+        "barGap": "10%",
+        "itemStyle": {
+            "normal": {
+                "color": "rgba(255,144,128,1)",
+                "label": {
+                    "show": true,
+                    "textStyle": {
+                        "color": "#fff"
+                    },
+                    "position": "insideTop",
+                    formatter: function(p) {
+                        return p.value > 0 ? (p.value) : '';
+                    }
+                }
+            }
+        },
+        "data": fail_data
+        },
+
+        {
+        "name": "PASS",
+        "type": "bar",
+        "stack": "总量",
+        "itemStyle": {
+            "normal": {
+                "color": "rgba(0,191,183,1)",
+                "barBorderRadius": 0,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    formatter: function(p) {
+                        return p.value > 0 ? (p.value) : '';
+                    }
+                }
+            }
+        },
+        "data": pass_data
+        }, {
+        "name": "TOTAL",
+        "type": "line",
+        "stack": "总量",
+        symbolSize:10,
+        symbol:'circle',
+        "itemStyle": {
+            "normal": {
+                "color": "rgba(252,230,48,1)",
+                "barBorderRadius": 0,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    formatter: function(p) {
+                        return p.value > 0 ? (p.value) : '';
+                    }
+                }
+            }
+        },
+        "data": total_data
+        },
+        ]
+        };
+        option = {
+        backgroundColor: '#394056',
+        title: {
+                    text: 'Total Runs',
+                    textStyle: {
+                        fontWeight: 'normal',
+                        fontSize: 16,
+                        color: '#F1F1F3'
+                    },
+                    left: '6%'
+        },
+        tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        lineStyle: {
+                            color: '#57617B'
+                        }
+                    }
+        },
+        dataZoom: [{
+        type: 'inside',
+        start: 0,
+        end: 100
+        }, {
+        show: true,
+        type: 'slider',
+        y: '100%',
+        start: 0,
+        end: 100
+        }],
+        legend: {
+        icon: 'rect',
+        itemWidth: 14,
+        itemHeight: 5,
+        itemGap: 13,
+        data: ['PASS', 'TOTAL', 'FAIL'],
+        right: '4%',
+        textStyle: {
+        fontSize: 12,
+        color: '#F1F1F3'
+        }
+        },
+        grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+        },
+        xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        axisLine: {
+        lineStyle: {
+            color: 'white'
+        }
+        },
+        data: xData
+        }],
+        yAxis: [{
+        type: 'value',
+        axisTick: {
+        show: false
+        },
+        axisLine: {
+        lineStyle: {
+            color: 'white'
+        }
+        },
+        axisLabel: {
+        margin: 10,
+        textStyle: {
+            fontSize: 14
+        }
+        },
+        splitLine: {
+        lineStyle: {
+            color: '#57617B'
+        }
+        }
+        }],
+        series: [{
+        name: 'PASS',
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+        normal: {
+            width: 1
+        }
+        },
+        areaStyle: {
+        normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: 'rgba(137, 189, 27, 0.3)'
+            }, {
+                offset: 0.8,
+                color: 'rgba(137, 189, 27, 0)'
+            }], false),
+            shadowColor: 'rgba(0, 0, 0, 0.1)',
+            shadowBlur: 10
+        }
+        },
+        itemStyle: {
+        normal: {
+            color: 'rgb(137,189,27)'
+        }
+        },
+        data: pass_data
+        }, {
+        name: 'TOTAL',
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+        normal: {
+            width: 1
+        }
+        },
+        areaStyle: {
+        normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: 'rgba(0, 136, 212, 0.3)'
+            }, {
+                offset: 0.8,
+                color: 'rgba(0, 136, 212, 0)'
+            }], false),
+            shadowColor: 'rgba(0, 0, 0, 0.1)',
+            shadowBlur: 10
+        }
+        },
+        itemStyle: {
+        normal: {
+            color: 'rgb(0,136,212)'
+        }
+        },
+        data: total_data
+        }, {
+        name: 'FAIL',
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+        normal: {
+            width: 1
+        }
+        },
+        areaStyle: {
+        normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: 'rgba(219, 50, 51, 0.3)'
+            }, {
+                offset: 0.8,
+                color: 'rgba(219, 50, 51, 0)'
+            }], false),
+            shadowColor: 'rgba(0, 0, 0, 0.1)',
+            shadowBlur: 10
+        }
+        },
+        itemStyle: {
+        normal: {
+            color: 'rgb(219,50,51)'
+        }
+        },
+        data: fail_data
+        }, ]
+        };
+
+        myChart.setOption(option);
+        window.onresize = function () {
+            resizecon();
+            myChart.resize();
+        };
+    })
+
+    $('#back').click(function(){
+        location.href="?pn={{ product_name }}";
+    })
+
+
+})
+</script>
+
+{% endif %}
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+
+
+</body>
+
+</html>

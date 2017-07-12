@@ -1,0 +1,6 @@
+Django==1.10.6
+psycopg2==2.7.1
+six==1.10.0
+uWSGI==2.0.15
+wheel==0.29.0
+wsgiref==0.1.2

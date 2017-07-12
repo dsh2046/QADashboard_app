@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block title %}<title>Test_Versioning</title>{% endblock %}
+    {% load divide %}
+    {% load staticfiles %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static '/vendor/metisMenu/metisMenu.min.css'%}" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="{% static '/vendor/datatables-plugins/dataTables.bootstrap.css'%}" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="{% static '/vendor/datatables-responsive/dataTables.responsive.css'%}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static '/dist/css/sb-admin-2.css'%}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static '/vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="{% static '/vendor/sweetalert2/sweetalert2.min.css'%}" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+        <style>
+            .tooltip2 {
+                position: relative;
+            }
+            .tooltiptext2 {
+                visibility: hidden;
+                width: 250px;
+                background-color: black;
+                opacity:0.8;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 999;
+                bottom: 200%;
+                left: 0%;
+                margin-left: -320px;
+            }
+
+            .tooltiptext2::after {
+                content: " ";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: black transparent transparent transparent;
+            }
+            .tooltip2:hover .tooltiptext2 {
+                visibility: visible;
+            }
+
+        </style>
+
+</head>
+{% block body %}
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Welcome&nbsp&nbsp{{username}} </a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!--<li class="dropdown">-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+                        <!--<i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu dropdown-messages">-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<strong>John Smith</strong>-->
+                                    <!--<span class="pull-right text-muted">-->
+                                        <!--<em>Yesterday</em>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                                <!--<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<strong>John Smith</strong>-->
+                                    <!--<span class="pull-right text-muted">-->
+                                        <!--<em>Yesterday</em>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                                <!--<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<strong>John Smith</strong>-->
+                                    <!--<span class="pull-right text-muted">-->
+                                        <!--<em>Yesterday</em>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                                <!--<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a class="text-center" href="#">-->
+                                <!--<strong>Read All Messages</strong>-->
+                                <!--<i class="fa fa-angle-right"></i>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--&lt;!&ndash; /.dropdown-messages &ndash;&gt;-->
+                <!--</li>-->
+                <!--&lt;!&ndash; /.dropdown &ndash;&gt;-->
+                <!--<li class="dropdown">-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+                        <!--<i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu dropdown-tasks">-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<p>-->
+                                        <!--<strong>Task 1</strong>-->
+                                        <!--<span class="pull-right text-muted">40% Complete</span>-->
+                                    <!--</p>-->
+                                    <!--<div class="progress progress-striped active">-->
+                                        <!--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">-->
+                                            <!--<span class="sr-only">40% Complete (success)</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<p>-->
+                                        <!--<strong>Task 2</strong>-->
+                                        <!--<span class="pull-right text-muted">20% Complete</span>-->
+                                    <!--</p>-->
+                                    <!--<div class="progress progress-striped active">-->
+                                        <!--<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">-->
+                                            <!--<span class="sr-only">20% Complete</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<p>-->
+                                        <!--<strong>Task 3</strong>-->
+                                        <!--<span class="pull-right text-muted">60% Complete</span>-->
+                                    <!--</p>-->
+                                    <!--<div class="progress progress-striped active">-->
+                                        <!--<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">-->
+                                            <!--<span class="sr-only">60% Complete (warning)</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<p>-->
+                                        <!--<strong>Task 4</strong>-->
+                                        <!--<span class="pull-right text-muted">80% Complete</span>-->
+                                    <!--</p>-->
+                                    <!--<div class="progress progress-striped active">-->
+                                        <!--<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">-->
+                                            <!--<span class="sr-only">80% Complete (danger)</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a class="text-center" href="#">-->
+                                <!--<strong>See All Tasks</strong>-->
+                                <!--<i class="fa fa-angle-right"></i>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--&lt;!&ndash; /.dropdown-tasks &ndash;&gt;-->
+                <!--</li>-->
+                <!--&lt;!&ndash; /.dropdown &ndash;&gt;-->
+                <!--<li class="dropdown">-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+                        <!--<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu dropdown-alerts">-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<i class="fa fa-comment fa-fw"></i> New Comment-->
+                                    <!--<span class="pull-right text-muted small">4 minutes ago</span>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<i class="fa fa-twitter fa-fw"></i> 3 New Followers-->
+                                    <!--<span class="pull-right text-muted small">12 minutes ago</span>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<i class="fa fa-envelope fa-fw"></i> Message Sent-->
+                                    <!--<span class="pull-right text-muted small">4 minutes ago</span>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<i class="fa fa-tasks fa-fw"></i> New Task-->
+                                    <!--<span class="pull-right text-muted small">4 minutes ago</span>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<div>-->
+                                    <!--<i class="fa fa-upload fa-fw"></i> Server Rebooted-->
+                                    <!--<span class="pull-right text-muted small">4 minutes ago</span>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a class="text-center" href="#">-->
+                                <!--<strong>See All Alerts</strong>-->
+                                <!--<i class="fa fa-angle-right"></i>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--&lt;!&ndash; /.dropdown-alerts &ndash;&gt;-->
+                <!--</li>-->
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href='{% url "index" %}' id="a_dashboard" ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts</a>-->
+                            <!--<ul class="nav nav-second-level">-->
+                                <!--<li>-->
+                                    <!--<a href="flot.html">Flot Charts</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="morris.html">Morris.js Charts</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--&lt;!&ndash; /.nav-second-level &ndash;&gt;-->
+                        <!--</li>-->
+                        <li >
+                            <a id='a_table' href="{% url 'table' %}"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        </li>
+                        <li>
+                            <a id="a_histogram" ><i class="fa fa-bar-chart-o fa-fw"></i><span style="margin-left:5px">Histogram</span></a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>-->
+                            <!--<ul class="nav nav-second-level">-->
+                                <!--<li>-->
+                                    <!--<a href="panels-wells.html">Panels and Wells</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="buttons.html">Buttons</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="notifications.html">Notifications</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="typography.html">Typography</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="icons.html"> Icons</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="grid.html">Grid</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--&lt;!&ndash; /.nav-second-level &ndash;&gt;-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->
+                            <!--<ul class="nav nav-second-level">-->
+                                <!--<li>-->
+                                    <!--<a href="#">Second Level Item</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="#">Second Level Item</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="#">Third Level <span class="fa arrow"></span></a>-->
+                                    <!--<ul class="nav nav-third-level">-->
+                                        <!--<li>-->
+                                            <!--<a href="#">Third Level Item</a>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<a href="#">Third Level Item</a>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<a href="#">Third Level Item</a>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<a href="#">Third Level Item</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                    <!--&lt;!&ndash; /.nav-third-level &ndash;&gt;-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--&lt;!&ndash; /.nav-second-level &ndash;&gt;-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>-->
+                            <!--<ul class="nav nav-second-level">-->
+                                <!--<li>-->
+                                    <!--<a href="blank.html">Blank Page</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="login.html">Login Page</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--&lt;!&ndash; /.nav-second-level &ndash;&gt;-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper" class="Table">
+            <div class="row">
+                <!--<div class="col-lg-12">-->
+                    <!--<h1 class="page-header">Tables</h1>-->
+                <!--</div>-->
+
+            </div>
+
+            <div class="row mainTB" style="margin-top:2%">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i>All Test Runs</i></h4>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none">ID</th>
+                                        <th>Job Name</th>
+                                        <th>Date/Time</th>
+                                        <th>Total</th>
+                                        <th>Passed</th>
+                                        <th>Failed</th>
+                                        <th>Passed %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in result %}
+                                        <tr class="datalist">
+                                            <td style="display:none">{{ data.id }}</td>
+                                            <td><i>{{ data.name }}</i></td>
+                                            <td>{{ data.start_time }}</td>
+                                            <td>{{ data.total_ran }}</td>
+                                            {% if data.total_passed > 0 %}
+                                            <td style="background-color:#e6ffee">{{ data.total_passed }}</td>
+                                            {% else %}
+                                            <td>{{ data.total_passed }}</td>
+                                            {% endif %}
+                                            {% if data.total_failed > 0 %}
+                                            <td style="background-color:#ffcccc">{{ data.total_failed }}</td>
+                                            {% else %}
+                                            <td>{{ data.total_failed }}</td>
+                                            {% endif %}
+                                            <td>{{ data.total_passed |divide:data.total_ran }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row subTB" style="display:none;margin-top:2%">
+                <div class="col-lg-8 col-sm-6" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading sub_panel_heading">
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped  table-hover" id="subTab">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Test Name</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="detail">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <div class="col-lg-4 col-sm-6" id="container">
+                    <h4 style="display:inline-block"><span id="pass" class="label label-success"><b>pass:</b><b id="pass_num"></b></span></h4>
+                    <h4 style="display:inline-block"><span id="fail"  class="label label-danger"><b>fail:</b><b id="fail_num"></b></span></h4>
+                    <h4 style="display:inline-block"><span id="others"  class="label label-warning"><b>others:</b><b id="other_num"></b></span></h4>
+                    <h4 style="display:inline-block"><span id="total" style="margin-left:50%" class="label label-default"><b>Total:</b><b id="total_num"></b></span></h4>
+        <div id="chart"></div>
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+
+             <div id="wrapper-his" class="row hisTB" style="display:none">
+                 <div class="col-lg-12 col-sm-12" id="container2" style="width:95%;height:500px;margin-top:30px;">
+                    <div id="histogram"></div>
+                 </div>
+                 <div></div>
+             </div>
+    </div>
+    <!-- /#wrapper -->
+
+
+    </div>
+    <!-- jQuery -->
+
+    <script src="{% static '/vendor/jquery/jquery.min.js'%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static '/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static '/vendor/metisMenu/metisMenu.min.js'%}"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="{% static '/vendor/datatables/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static '/vendor/datatables-plugins/dataTables.bootstrap.min.js'%}"></script>
+    <script src="{% static '/vendor/datatables-responsive/dataTables.responsive.js'%}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static '/dist/js/sb-admin-2.js'%}"></script>
+    <script src="{% static '/js/echarts.js'%}"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+
+        $('#a_histogram, #a_table, #a_dashboard').hover(function(){
+                $(this).css('cursor','pointer');
+
+            }, function(){
+
+            })
+
+
+
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+
+        $(".datalist").click(function(){
+
+        var pass = 0;
+        var fail = 0;
+        var other = 0;
+        var username = '{{username}}';
+           id = $(this).children("td:first-child").text();
+           panel_name = $(this).children("td:nth-child(2)").text();
+           $('.sub_panel_heading').html('');
+           $('.sub_panel_heading').append('<a href="#" class="back"><span class="glyphicon glyphicon-chevron-left"></span></a>'+'<span style="margin-left:30%;" class="test panel_name">'+panel_name+'</span><a href="/static/Test_Log/{{username}}_Log/'+panel_name+'_Log/log.html" style="margin-left:30%">Log</a>');
+           $.ajax({
+                    type: "GET",
+                    url: "{% url 'detail'%}",
+                    data: {id: id, username: username},
+                    success:function(data){
+                        data = eval('('+data+')');
+                        $('.detail').html('');
+
+                       $.each(data, function(k,v){
+                            if(v[4]=="Pass"){
+                                pass+=1;
+                                $('.detail').append('<tr class="success"><td>'+v[0]+'</td><td><i>'+v[1]+'</i></td><td>'+v[2]+'</td><td>'+v[3]+'</td><td>'+v[4]+'</td></tr>');
+                            }
+                            else{
+                                fail+=1;
+                                $('.detail').append('<tr class="danger tooltip2"><td>'+v[0]+'</td><td><i>'+v[1]+'</i></td><td>'+v[2]+'</td><td>'+v[3]+'</td><td><span class="tooltip2">'+v[4]+'<span class="tooltiptext2">'+v[5]+'</span></span></td></tr>');
+                            }
+                        })
+                        $('#subTab').DataTable()
+                        $('#pass_num').html('');
+                        $('#pass_num').append(pass);
+                        $('#fail_num').html('');
+                        $('#fail_num').append(fail);
+                        $('#other_num').html('');
+                        $('#other_num').append(other);
+                        $('#total_num').html('');
+                        $('#total_num').append(Number(pass)+Number(fail)+Number(other));
+
+                        $('.subTB').css('display','');
+                        $('.mainTB').css('display','none')
+
+                        $('.back').click(function(){
+                            $('.subTB').css('display','none')
+                            $('.mainTB').css('display','')
+
+                        })
+
+                        var container = document.getElementById('container');
+                        var chart = document.getElementById('chart')
+                        var resizecon = function(){
+                            chart.style.width = container.clientWidth+"px";
+                            chart.style.height = container.clientWidth+"px";
+                        }
+
+                        resizecon();
+                        var myChart = echarts.init(chart);
+
+ var giftImageUrl = "https://d1qb2nb5cznatu.cloudfront.net/startups/i/602112-c37af9df4111c6ffd5845a986ca3d477-medium_jpg.jpg?buster=1423269026"
+var option = {
+     graphic: {
+         elements: [{
+             type: 'image',
+             style: {
+                 image: giftImageUrl,
+                 width: container.clientWidth/9,
+                 height: container.clientWidth/9
+             },
+             left: '44%',
+             top: '34%'
+         }]
+     },
+     series: [{
+         type: 'pie',
+         radius: [30, '55%'],
+         center: ['50%', '40%'],
+         roseType: 'radius',
+         color: ['#46d185', '#ec5845'],
+         data: [{
+
+             value: pass,
+             name: 'PASS'
+         }, {
+             value: fail,
+             name: 'FAIL'
+         }],
+         label: {
+             normal: {
+                 textStyle: {
+                     fontSize: 14
+                 },
+                 formatter: function(param) {
+                     return param.name + ':\n' + Math.round(param.percent) + '%';
+                 }
+             }
+         },
+         labelLine: {
+             normal: {
+                 smooth: true,
+                 lineStyle: {
+                     width: 2
+                 }
+             }
+         },
+         itemStyle: {
+             normal: {
+                 shadowBlur: 30,
+                 shadowColor: 'rgba(0, 0, 0, 0.4)'
+             }
+         },
+
+         animationType: 'scale',
+         animationEasing: 'elasticOut',
+         animationDelay: function(idx) {
+             return Math.random() * 200;
+         }
+     }]
+ };
+                                  myChart.setOption(option);
+                                window.onresize = function () {
+                                            resizecon();
+                                            myChart.resize();
+                                        };
+
+                    }
+
+           })
+        })
+
+    $('#a_histogram').click(function(){
+        $('.subTB, .mainTB').css('display','none');
+        $('#wrapper-his').css('display','');
+         var container = document.getElementById('container2');
+                        var chart = document.getElementById('histogram')
+                        var resizecon = function(){
+                            chart.style.width = container.clientWidth+"px";
+                            chart.style.height = container.clientHeight+"px";
+                        }
+
+                        resizecon();
+                        var myChart = echarts.init(chart);
+
+                        var xData = function() {
+                            var data = [];
+
+                            {% for i in result %}
+                                var date = '{{ i.name }}\n{{i.start_time}}';
+                                var date_filter = '';
+                                date_str = date.split(",");
+                                $.each(date_str, function(i,n){
+                                    date_filter += n+'\n';
+                                })
+                                data.push(date_filter);
+
+                            {% endfor %}
+                            return data;
+
+                        }();
+
+        var pass_data = [];
+        var fail_data = [];
+        var total_data = [];
+        {% for i in result %}
+            pass_data.push('{{i.total_passed}}');
+            fail_data.push('{{i.total_failed}}');
+            total_data.push('{{i.total_ran}}');
+        {% endfor %}
+
+option2 = {
+    backgroundColor: "#344b58",
+    "title": {
+        "text": "",
+        "subtext": "",
+        x: "4%",
+
+        textStyle: {
+            color: '#fff',
+            fontSize: '22'
+        },
+        subtextStyle: {
+            color: '#90979c',
+            fontSize: '16',
+
+        },
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow",
+            textStyle: {
+                color: "#fff"
+            }
+
+        },
+    },
+    "grid": {
+        "borderWidth": 0,
+        "top": 110,
+        "bottom": 95,
+        textStyle: {
+            color: "#fff"
+        }
+    },
+    "legend": {
+        x: '4%',
+        top: '11%',
+        textStyle: {
+            color: '#90979c',
+        },
+        "data": ['FAIL', 'PASS']
+    },
+
+
+    "calculable": true,
+    "xAxis": [{
+        "type": "category",
+        "axisLine": {
+            lineStyle: {
+                color: 'white'
+            }
+        },
+        "splitLine": {
+            "show": false
+        },
+        "axisTick": {
+            "show": false
+        },
+        "splitArea": {
+            "show": false
+        },
+        "axisLabel": {
+            "interval": 0,
+
+        },
+        "data": xData,
+    }],
+    "yAxis": [{
+        "type": "value",
+        "splitLine": {
+            "show": false
+        },
+        "axisLine": {
+            lineStyle: {
+                color: 'white'
+            }
+        },
+        "axisTick": {
+            "show": false
+        },
+        "axisLabel": {
+            "interval": 0,
+
+        },
+        "splitArea": {
+            "show": false
+        },
+
+    }],
+    "dataZoom": [{
+        "show": true,
+        "height": 30,
+        "xAxisIndex": [
+            0
+        ],
+        bottom: 10,
+        "start": 0,
+        "end": 100,
+        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+        handleSize: '110%',
+        handleStyle:{
+            color:"#d3dee5",
+
+        },
+           textStyle:{
+            color:"#fff"},
+           borderColor:"#90979c"
+
+
+    }, {
+        "type": "inside",
+        "show": true,
+        "height": 15,
+        "start": 1,
+        "end": 35
+    }],
+    "series": [{
+            "name": "FAIL",
+            "type": "bar",
+            "stack": "总量",
+            "barMaxWidth": 35,
+            "barGap": "10%",
+            "itemStyle": {
+                "normal": {
+                    "color": "rgba(255,144,128,1)",
+                    "label": {
+                        "show": true,
+                        "textStyle": {
+                            "color": "#fff"
+                        },
+                        "position": "insideTop",
+                        formatter: function(p) {
+                            return p.value > 0 ? (p.value) : '';
+                        }
+                    }
+                }
+            },
+            "data": fail_data
+        },
+
+        {
+            "name": "PASS",
+            "type": "bar",
+            "stack": "总量",
+            "itemStyle": {
+                "normal": {
+                    "color": "rgba(0,191,183,1)",
+                    "barBorderRadius": 0,
+                    "label": {
+                        "show": true,
+                        "position": "top",
+                        formatter: function(p) {
+                            return p.value > 0 ? (p.value) : '';
+                        }
+                    }
+                }
+            },
+            "data": pass_data
+        }, {
+            "name": "TOTAL",
+            "type": "line",
+            "stack": "总量",
+            symbolSize:10,
+            symbol:'circle',
+            "itemStyle": {
+                "normal": {
+                    "color": "rgba(252,230,48,1)",
+                    "barBorderRadius": 0,
+                    "label": {
+                        "show": true,
+                        "position": "top",
+                        formatter: function(p) {
+                            return p.value > 0 ? (p.value) : '';
+                        }
+                    }
+                }
+            },
+            "data": total_data
+        },
+    ]
+};
+option = {
+    backgroundColor: '#394056',
+    title: {
+        text: 'Total Runs',
+        textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16,
+            color: '#F1F1F3'
+        },
+        left: '6%'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            lineStyle: {
+                color: '#57617B'
+            }
+        }
+    },
+        dataZoom: [{
+        type: 'inside',
+        start: 0,
+        end: 100
+    }, {
+        show: true,
+        type: 'slider',
+        y: '100%',
+        start: 0,
+        end: 100
+    }],
+    legend: {
+        icon: 'rect',
+        itemWidth: 14,
+        itemHeight: 5,
+        itemGap: 13,
+        data: ['PASS', 'TOTAL', 'FAIL'],
+        right: '4%',
+        textStyle: {
+            fontSize: 12,
+            color: '#F1F1F3'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        axisLine: {
+            lineStyle: {
+                color: 'white'
+            }
+        },
+        data: xData
+    }],
+    yAxis: [{
+        type: 'value',
+        axisTick: {
+            show: false
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'white'
+            }
+        },
+        axisLabel: {
+            margin: 10,
+            textStyle: {
+                fontSize: 14
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: '#57617B'
+            }
+        }
+    }],
+    series: [{
+        name: 'PASS',
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+            normal: {
+                width: 1
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(137, 189, 27, 0.3)'
+                }, {
+                    offset: 0.8,
+                    color: 'rgba(137, 189, 27, 0)'
+                }], false),
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: 'rgb(137,189,27)'
+            }
+        },
+        data: pass_data
+    }, {
+        name: 'TOTAL',
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+            normal: {
+                width: 1
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(0, 136, 212, 0.3)'
+                }, {
+                    offset: 0.8,
+                    color: 'rgba(0, 136, 212, 0)'
+                }], false),
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: 'rgb(0,136,212)'
+            }
+        },
+        data: total_data
+    }, {
+        name: 'FAIL',
+        type: 'line',
+        smooth: true,
+        lineStyle: {
+            normal: {
+                width: 1
+            }
+        },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(219, 50, 51, 0.3)'
+                }, {
+                    offset: 0.8,
+                    color: 'rgba(219, 50, 51, 0)'
+                }], false),
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: 'rgb(219,50,51)'
+            }
+        },
+        data: fail_data
+    }, ]
+};
+
+                                  myChart.setOption(option);
+                                window.onresize = function () {
+                                            resizecon();
+                                            myChart.resize();
+                                        };
+
+    })
+
+
+    });
+    </script>
+
+</body>
+{% endblock %}
+
+
+</html>
+

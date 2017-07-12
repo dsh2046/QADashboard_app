@@ -1,0 +1,7 @@
+1487803304411	geckodriver	INFO	Listening on 127.0.0.1:56538
+1487803305437	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.Km2adBw2Hr09
+1487803305438	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1487803305470	geckodriver::marionette	INFO	Connecting to Marionette on localhost:44787
+1487803314914	Marionette	INFO	Listening on port 44787
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+[Child 31360] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-RuETGa/firefox-51.0.1+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 323

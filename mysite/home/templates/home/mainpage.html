@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+    <link href="{% static 'home/try.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<p>plz input 2 numbers</p>
+<form action="/add/" method="get">
+    a: <input type="text" id="a" name="a"> <br>
+    b: <input type="text" id="b" name="b"> <br>
+    <p>result: <span id='result'></span></p>
+    <p class="pp">2131231</p>
+    <button type="button" id='sum'>submit</button>
+</form>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#sum").click(function(){
+        var a = $("#a").val();
+        var b = $("#b").val();
+
+        $.ajax({
+            type: "GET",
+            url: "{% url 'add2'%}",
+            data: {a:a, b:b},
+            success:function(ret){
+            $('#result').html(ret)
+            }
+        })
+      });
+    });
+</script>
+</body>
+</html>
